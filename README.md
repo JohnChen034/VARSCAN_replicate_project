@@ -24,4 +24,4 @@ Email for questions regarding the tool:
 
 Kaifu Yang: kay002@ucsd.edu
 
-Jiayu Chen: 
+Jiayu Chen: jic034@ucsd.edu
