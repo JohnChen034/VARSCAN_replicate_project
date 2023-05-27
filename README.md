@@ -6,6 +6,8 @@ This is the final project of Group 15 in CSE185 in spring 2023. We build a varia
 
 Installation requires `pandas` to be installed. You can install it using pip: `pip install pandas`
 
+Installation requires `numpy` to be installed. You can install it using pip: `pip install numpy`
+
 # Basic Usage
 
 usage: `Vcall.py [-h] [-mvf MINVARFREQ] MPILEUPFILE`
