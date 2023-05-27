@@ -1,6 +1,10 @@
 # CSE185_project
 
+This is the final project of Group 15 in CSE185 in spring 2023. We build a variant calling tool that is similar to [VarScan](https://varscan.sourceforge.net/)
+
 # Installation instructions
+
+Installation requires `pandas` to be installed. You can install it using pip: `pip install pandas`
 
 # Basic Usage
 
@@ -14,7 +18,7 @@ The output file will be in [vcf](https://en.wikipedia.org/wiki/Variant_Call_Form
 
 # Contributers:
 
-Kaifu Yang and Jiayu Chen worked on this tool, with inspiration from  [VarScan](https://varscan.sourceforge.net/).
+Kaifu Yang and Jiayu Chen worked on this tool, with inspiration from [VarScan](https://varscan.sourceforge.net/).
 
 Email for questions regarding the tool:
 
