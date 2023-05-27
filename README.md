@@ -14,7 +14,9 @@ usage: `Vcall.py [-h] [-mvf MINVARFREQ] MPILEUPFILE`
 
 To run mypileup on a small test example (using files in this repo):
 
-`python Vcall.py trio.mpileup -minvarfreq 0.2`
+`python Vcall.py ./test/trio.mpileup -minvarfreq 0.2`
+
+note: file directly save to same level as test folder
 
 ## Options
 
