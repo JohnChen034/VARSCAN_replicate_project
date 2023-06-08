@@ -37,15 +37,14 @@ def main():
     ###input params
     mpileup_file = stuff["mpileupfile"]
     min_var_frequency = stuff["min_var_freq"] #set minimum var frequency threshold
-    print(min_var_frequency)
     min_reads = stuff["min_reads"] #min ALT count filter
     min_coverage = stuff["min_coverage"] #min coverage
     min_avg_qual = stuff["min_avg_qual"] #min quality score
     p_val_threshold = stuff["p_value"] #p-value threshold
     homo_threshold = stuff["min_freq_for_hom"] #Minimum frequency to call homozygote
-    if_strand_filt = stuff["strand_filter"]
-    output_path = stuff["out_path"]
-    file_name = stuff["file_name"]
+    if_strand_filt = stuff["strand_filter"] #if perform strand filter
+    output_path = stuff["out_path"] #output path
+    file_name = stuff["file_name"] #output filename
     
     ###functions 
     def get_INFO(format_row):
@@ -90,7 +89,6 @@ def main():
 
             count+=1
         out = row[end:]
-    #         out.loc['POS'] = row[1]
         return out
 
     def FORMAT(raw_string, raw_quality, homo_threshold = homo_threshold, min_avg_qual = min_avg_qual, min_reads = min_reads, min_var_frequency = min_var_frequency):
@@ -99,7 +97,6 @@ def main():
 
         SDP = len(raw_string)
         DP = len(filt_string)
-    #         print(SDP, DP, raw_string, filt_string)
 
         RDF = filt_string.count('.')
         RDR = filt_string.count(',')
@@ -114,24 +111,22 @@ def main():
             contingency_table = [[0, DP], [AD, RD]]
             p_value = fisher_exact(contingency_table, alternative='less')[1]
             return p_value
-        # f"{p_value*100:.2f}"
 
         PVAL = fischer_test(DP, RD, AD)
 
         GQ = -10 * math.log10(PVAL)
-        # PVAL = f"{PVAL:.4e}"
 
         def RABQ(string, quality):
             if RD == 0:
                 RBQ = 0
             else:
-                indices = [i for i in range(len(string)) if string[i] != r'[ACGTNacgtn]']
+                indices = [i for i in range(len(string)) if string[i] not in r'[ACGTNacgtn]']
                 RBQ = np.mean([ord(quality[i])-33 for i in indices]) if len(indices) > 0 else 0
 
             if AD == 0:
                 ABQ = 0
             else:   
-                indices = [i for i in range(len(string)) if string[i] == r'[ACGTNacgtn]']
+                indices = [i for i in range(len(string)) if string[i] in r'[ACGTNacgtn]']
                 ABQ = np.mean([ord(quality[i])-33 for i in indices]) if len(indices) > 0 else 0
             return int(RBQ), int(ABQ)
 
@@ -193,9 +188,6 @@ def main():
             boo_lst = tup.apply(lambda x: x[1])
             df[i] = new_strs
             outdf[i] = boo_lst.apply(lambda x: all(x))
-    #         out += [any(boo_lst)]
-    #         row[i] = new_str
-    #         print(row[i])
         df = df[~outdf.all(axis=1)]
         return df
     
@@ -259,10 +251,6 @@ def main():
     format_df = format_df.loc[df.index.tolist()]
 
     print("filt format_df done")
-    #     df.to_csv("debug_df.vcf", sep = "\t", index = True, header = True)
-    #     format_df.to_csv("debug_format.vcf", sep = "\t", index = True, header = True)
-    #     print(df[df[1] == 128583983])
-    print('\n')
 
     #3.2 filter based on min p value
     df = filter_pval(df, format_df)
@@ -320,5 +308,6 @@ def main():
         file.write(content)
         file.write(outdf.to_csv(index=False, sep='\t'))
 
+print(f"successfully output in {file_path}")
 if __name__ == '__main__':
     main()
