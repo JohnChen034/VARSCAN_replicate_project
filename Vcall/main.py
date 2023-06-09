@@ -24,11 +24,11 @@ def main():
     parser.add_argument('-p', '--p-value', metavar='PVALUE', type=float, default = 0.99,
                         help='p-value threshold for calling variants (default: 0.99)')
     parser.add_argument('-sf', '--strand-filter', metavar='STRANDFILTER', type=bool, default = True,
-                    help='Ignore variants with >90% support on one strand (default: True)')
-    parser.add_argument('-out', '--out-path', metavar='OUTPATH', type=str, default = os.getcwd(),
-                help='Specify the output path (default: current working directory)')
-    parser.add_argument('-f', '--file-name', metavar='FILENAME', type=str, default='output',
-                    help='Specify the file name (default: output)')
+                        help='Ignore variants with >90% support on one strand (default: True)')
+    parser.add_argument('-op', '--out-path', metavar='OUTPATH', type=str, default = os.getcwd(),
+                        help='Specify the output path (default: current working directory)')
+    parser.add_argument('-o', '--output', metavar='FILENAME', type=str, default='output',
+                        help='Specify the output file name (default: output)')
     
     args = parser.parse_args()
     
@@ -44,7 +44,7 @@ def main():
     homo_threshold = stuff["min_freq_for_hom"] #Minimum frequency to call homozygote
     if_strand_filt = stuff["strand_filter"] #if perform strand filter
     output_path = stuff["out_path"] #output path
-    file_name = stuff["file_name"] #output filename
+    file_name = stuff["output"] #output filename
     
     ###functions 
     def get_INFO(format_row):
@@ -84,9 +84,7 @@ def main():
             raw_quality = row[n+1]
             if len(raw_string) == 0:
                 row[f"Sample{count}"] = [1]*14
-            else:
-                row[f"Sample{count}"] = FORMAT(raw_string, raw_quality)
-
+            row[f"Sample{count}"] = FORMAT(raw_string, raw_quality)
             count+=1
         out = row[end:]
         return out
@@ -94,7 +92,8 @@ def main():
     def FORMAT(raw_string, raw_quality, homo_threshold = homo_threshold, min_avg_qual = min_avg_qual, min_reads = min_reads, min_var_frequency = min_var_frequency):
         filt_string = ''.join([raw_string[i] for i in range(len(raw_quality)) if ord(raw_quality[i]) >= min_avg_qual+33])
         filt_quality = ''.join([i for i in raw_quality if ord(i) >= min_avg_qual + 33])
-
+        if len(raw_string) == 0:
+            return [1]*14
         SDP = len(raw_string)
         DP = len(filt_string)
 
@@ -309,5 +308,6 @@ def main():
         file.write(outdf.to_csv(index=False, sep='\t'))
 
     print(f"successfully output in {file_path}")
+
 if __name__ == '__main__':
     main()
