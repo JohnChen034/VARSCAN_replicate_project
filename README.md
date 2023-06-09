@@ -1,4 +1,4 @@
-# CSE185_project
+# Vcall
 
 This is the final project of Group 15 in CSE185 in spring 2023. We build a variant calling tool that is similar to [VarScan](https://varscan.sourceforge.net/)
 
@@ -17,13 +17,20 @@ Once you have `pandas` and `numpy` installed, you can install `Vcall` using pip:
 
 ```
 
+note: detailed version is in `requirements.txt`. 
+
 ## Basic Usage
 
-usage: `Vcall.py [-h] [-mvf MINVARFREQ] MPILEUPFILE`
+usage: 
+```
+Vcall.py [-h] [-mvf MINVARFREQ] MPILEUPFILE
+```
 
 To run mypileup on a small test example (using files in this repo):
 
-`python Vcall.py ./test/trio.mpileup -minvarfreq 0.2`
+```
+python Vcall.py ./test/trio.mpileup -minvarfreq 0.2
+```
 
 note: file directly save to same level as Vcall.py in default, see below for more options
 
@@ -31,7 +38,7 @@ note: file directly save to same level as Vcall.py in default, see below for mor
 
 positional arguments:
 
-  - `MPILEUPFILE`           path to the input mpileup file
+  - `MPILEUPFILE`       path to the input mpileup file
 
 
   - `-op OUTPATH`, `--out-path OUTPATH`
