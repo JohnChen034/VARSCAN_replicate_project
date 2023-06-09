@@ -308,6 +308,6 @@ def main():
         file.write(content)
         file.write(outdf.to_csv(index=False, sep='\t'))
 
-print(f"successfully output in {file_path}")
+    print(f"successfully output in {file_path}")
 if __name__ == '__main__':
     main()
