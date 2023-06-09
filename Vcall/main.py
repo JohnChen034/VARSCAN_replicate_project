@@ -24,7 +24,7 @@ def main():
     parser.add_argument('-p', '--p-value', metavar='PVALUE', type=float, default = 0.99,
                         help='p-value threshold for calling variants (default: 0.99)')
     parser.add_argument('-sf', '--strand-filter', metavar='STRANDFILTER', type=bool, default = True,
-                        help='Ignore variants with >90% support on one strand (default: True)')
+                        help='Ignore variants with more than 90 percent support on one strand (default: True)')
     parser.add_argument('-op', '--out-path', metavar='OUTPATH', type=str, default = os.getcwd(),
                         help='Specify the output path (default: current working directory)')
     parser.add_argument('-o', '--output', metavar='FILENAME', type=str, default='output',
