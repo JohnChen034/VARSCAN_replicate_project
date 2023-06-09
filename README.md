@@ -12,9 +12,13 @@ Installation requires `numpy` to be installed. You can install it using pip:
 ``` 
 pip install numpy 
 ```
-Once you have `pandas` and `numpy` installed, you can install `Vcall` using pip: 
+Installation requires `scipy` to be installed. You can install it using pip: 
+``` 
+pip install scipy
 ```
-
+Once you have all packages installed, please download the Vcall folder and the setup.py file and put the setup.py in the same directory with the Vcall fole, then open a terminal and cd to the directory. Finally, you can install `Vcall` using pip: 
+```
+pip install .
 ```
 
 note: detailed version is in `requirements.txt`. 
@@ -23,16 +27,15 @@ note: detailed version is in `requirements.txt`.
 
 usage: 
 ```
-Vcall.py [-h] [-mvf MINVARFREQ] MPILEUPFILE
+Vcallsnp [-h] [-mvf MINVARFREQ] [-mc MINCOVERAGE] [-mr MINREADS] [-maq MINAVGQUAL] [-mffh MINFREQFORHOM] [-p PVALUE] [-sf STRANDFILTER] [-out OUTPATH] [-f FILENAME] MPILEUPFILE
 ```
 
 To run mypileup on a small test example (using files in this repo):
 
 ```
-python Vcall.py ./test/trio.mpileup -minvarfreq 0.2
+Vcallsnp ./test/trio.mpileup -mvf 0.2 -mffh 0.8 -p 0.01 -f filename
 ```
 
-note: file directly save to same level as Vcall.py in default, see below for more options
 
 ## Options
 
