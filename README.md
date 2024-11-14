@@ -1,6 +1,6 @@
 # Vcall
 
-This is the final project of Group 15 in CSE185 in spring 2023. We build a variant calling tool specifically on SNPs, and could expand to more later. Use `Vcallsnp` to perform variant calling on SNPs.
+ We build a variant calling tool specifically on SNPs, and could expand to more later. Use `Vcallsnp` to perform variant calling on SNPs.
 
 ## Installation instructions
 
